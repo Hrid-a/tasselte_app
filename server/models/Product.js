@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
         required: [true, "The product name is required"],
         unique: [true, "The product name should be unique"],
         minLength: [4, 'The product name must be at least 4 characters'],
-        maxLength: [30, "The product name shouldn't exceed 30 characters"]
+        maxLength: [70, "The product name shouldn't exceed 30 characters"]
     },
     price: {
         type: Number,
@@ -26,13 +26,15 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide the product price"],
     },
-    // id, src;
-    images: {},
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "",
-        required: true
-
+    image: {
+        id: {
+            type: String,
+            required: true,
+        },
+        src: {
+            type: String,
+            required: true,
+        }
     },
     createdAt: {
         type: Date,

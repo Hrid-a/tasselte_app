@@ -5,26 +5,36 @@ const fileUpload = require('express-fileupload');
 const globalErrorHandler = require('./controllers/errorContrller');
 const CustomError = require('./lib/CustomError');
 const morgan = require('morgan');
+const cookieParser = require("cookie-parser");
 const app = express();
 
-
-// white list with cors middleware
+app.use((req, res, next) => {
+    res.removeHeader("X-Powered-By");
+    res.setHeader("Referrer-Policy", 'origin-when-cross-origin');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    next();
+})
 app.use(cors());
 
-// json, urlencoded middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// cookies parser middleware
+app.use(cookieParser());
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/'
 }))
 
 app.use(morgan('tiny'));
-// routes
 
+// routes
+const product = require('./routes/product');
+const user = require('./routes/user');
+
+app.use('/api/v1', product);
+app.use('/api/v1', user);
 
 
 app.all("*", (req, res, next) => {
