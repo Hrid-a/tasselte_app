@@ -13,7 +13,7 @@ const ProductGrid = () => {
 
     const fetchProducts = async (page = 1) => {
         try {
-            const query = `http://localhost:3000/api/v1/products/all_products?page=${page}`;
+            const query = `${import.meta.env.VITE_BACKEND_URI}/products/all_products?page=${page}`;
             const { data } = await axios.get(query);
             return data;
         } catch (error) {

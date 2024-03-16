@@ -9,7 +9,7 @@ const ProductPage = () => {
     const { id } = useParams()
     const fetchProducts = async () => {
         try {
-            const query = `http://localhost:3000/api/v1/products/${id}`
+            const query = `${import.meta.env.VITE_BACKEND_URI}/products/${id}`
             const { data } = await axios.get(query);
             return data;
         } catch (error) {

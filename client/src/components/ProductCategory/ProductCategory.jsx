@@ -9,7 +9,7 @@ const ProductCategory = () => {
     const category = s.get('category');
     const fetchProducts = async () => {
         try {
-            const query = `http://localhost:3000/api/v1/products/all_products?category=${category}`
+            const query = `${import.meta.env.VITE_BACKEND_URI}/products/all_products?category=${category}`
             const { data } = await axios.get(query);
             return data;
         } catch (error) {
