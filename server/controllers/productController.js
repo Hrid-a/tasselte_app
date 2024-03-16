@@ -1,19 +1,17 @@
+const { safeParse } = require('valibot');
+const cloudinary = require('cloudinary').v2;
 const BigPromise = require('../lib/BigPromise');
 const CustomError = require('../lib/CustomError');
 const { productValidation } = require('../lib/product');
 const Product = require('../models/Product');
-const { safeParse } = require('valibot');
-const cloudinary = require('cloudinary').v2;
-
+const WhereClause = require('../lib/WhereClause');
 
 
 exports.createProduct = BigPromise(async (req, res, next) => {
-
     const result = safeParse(productValidation, req.body);
     if (!result.success) return next(new CustomError(result.issues[0].message, 400));
 
     const data = result.output;
-
     if (!req.files) return next(new CustomError("You should provide at least one image", 400));
     if (req.files) {
 
@@ -24,9 +22,9 @@ exports.createProduct = BigPromise(async (req, res, next) => {
         if (!result) return (new CustomError("promise could not be resolved", 400))
         data.image = { id: result.public_id, src: result.secure_url };
     }
-
-    const product = await Product.create(data);
-
+    console.log("before created");
+    const product = await Product.create({ ...data });
+    console.log("created");
     if (!product) return next(new CustomError('product creation failed', 422))
 
     res.status(201).json({ staus: "success", message: "product has been created successfully", product })
@@ -49,9 +47,8 @@ exports.allProducts = BigPromise(async (req, res, next) => {
     const resultPerPage = 7;
     const totalProducts = await Product.countDocuments();
     const productsObj = new WhereClause(Product.find(), req.query).search().paginator(resultPerPage);
-
     const products = await productsObj.base;
-    res.status(200).json({ message: "all the products", status: "success", totalProducts, products });
+    res.status(200).json({ message: "all the products", status: "success", resultPerPage, totalProducts, products });
 
 });
 

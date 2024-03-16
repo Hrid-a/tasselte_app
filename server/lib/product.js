@@ -1,4 +1,4 @@
-const { object, string, number, transform } = require('valibot');
+const { object, string, transform } = require('valibot');
 
 exports.productValidation = object({
     name: string("product name should be a string", [
@@ -11,8 +11,8 @@ exports.productValidation = object({
     description: string("Enter a description", [
         transform(string(), (input) => input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ""))
     ]),
-    stock: string("enter a valid stock", [
-        transform(string(), (input) => Number(input)),
+    category: string("enter a valid stock", [
+        transform(string(), (input) => input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ""))
     ])
 
 })

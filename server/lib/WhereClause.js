@@ -10,10 +10,10 @@ class WhereClause {
             filterObj.name = { $regex: this.basequery.search, $options: "i" };
         }
 
-        // if (this.basequery?.category) {
-        //     filterObj.category = this.basequery.category;
+        if (this.basequery?.category) {
+            filterObj.category = this.basequery.category;
 
-        // }
+        }
 
         this.base = this.base.find({ ...filterObj }).sort({ createdAt: -1 });
         return this;

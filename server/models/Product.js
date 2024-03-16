@@ -22,10 +22,6 @@ const productSchema = new mongoose.Schema({
         minLength: [10, "The Product description must be at least 10 characters long"],
         maxLength: [270, "The Product description must be at most 270 characters long"],
     },
-    stock: {
-        type: Number,
-        required: [true, "Please provide the product price"],
-    },
     image: {
         id: {
             type: String,
@@ -35,6 +31,14 @@ const productSchema = new mongoose.Schema({
             type: String,
             required: true,
         }
+    },
+    category: {
+        type: String,
+        trim: true,
+        required: [true, "The product name is required"],
+        unique: [true, "The product name should be unique"],
+        minLength: [4, 'The product name must be at least 4 characters'],
+        maxLength: [70, "The product name shouldn't exceed 30 characters"]
     },
     createdAt: {
         type: Date,
