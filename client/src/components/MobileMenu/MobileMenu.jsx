@@ -1,11 +1,14 @@
 import styled, { keyframes } from 'styled-components';
 import Button from '../Button';
 import Icon from '../Icon';
-import { COLORS, WEIGHTS } from '../../lib/constants';
+import { COLORS, WEIGHTS, headerData } from '../../lib/constants';
 import { NavLink } from 'react-router-dom';
-
+import { useTranslation } from 'react-i18next';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
+    const { t, i18n } = useTranslation();
+    const lang = i18n.language;
+    const navItems = headerData[lang].nav;
     return isOpen ? (
         <Wrapper>
             <BackDrop onClick={onDismiss} />
@@ -16,10 +19,11 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
                         <Icon icon={'dismiss-icon'} size={20} onClick={onDismiss} />
                     </CloseButton>
                     <Nav>
-                        <Link to="/about-us"> من نحن  </Link>
-                        <Link to="/oil?category=oil">زيت الزيتون </Link>
-                        <Link to="/honey?category=honey">العسل الحر </Link>
-                        <Link to="/"> الصفحة الرئيسية </Link>
+                        {
+                            navItems.map(navItem => (
+                                <Link key={navItem.name} to={navItem.href}>{navItem.name} </Link>
+                            ))
+                        }
                     </Nav>
                 </Content>
             </MainWrapper>
@@ -89,7 +93,7 @@ const CloseButton = styled(Button)`
 
 const Nav = styled.nav`
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: center;
   gap: 48px;
   margin: 0px 48px;

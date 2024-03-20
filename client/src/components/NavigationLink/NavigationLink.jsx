@@ -30,6 +30,7 @@ const Wrapper = styled(NavLink)`
     font-weight: ${WEIGHTS.normal};
     text-transform: uppercase;
     cursor: pointer;
+    padding-inline: 20px;
     /* 
         text slide in animation
     */

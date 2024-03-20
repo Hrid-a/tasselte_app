@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     position: relative;
     width: fit-content;
     max-height: 70px;
-    margin-left: auto;
+    /* margin-inline-end: auto; */
 
 `;
 

@@ -1,5 +1,6 @@
 export const COLORS = {
     white: 'hsl(0deg, 0%, 100%)',
+    black: 'hsl(100% 0% 100%)',
     gray: {
         100: 'hsl(185deg, 5%, 95%)',
         300: 'hsl(190deg, 5%, 80%)',
@@ -7,7 +8,7 @@ export const COLORS = {
         700: 'hsl(220deg, 5%, 40%)',
         900: 'hsl(220deg, 3%, 20%)',
     },
-    primary: 'hsl(340deg, 65%, 47%)',
+    primary: 'hsl(35.6deg 100% 64.31%)',
     secondary: 'hsl(240deg, 60%, 63%)',
 };
 
@@ -28,4 +29,52 @@ export const QUERIES = {
     laptopAndUp: `(min-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
     desktopAndUp: `(min-width: ${BREAKPOINTS.desktopMin / 16}rem)`
 }
+
+
+
+export const headerData = {
+    fr: {
+        nav: [
+            {
+                name: 'home',
+                href: '/',
+            },
+            {
+                name: 'Miel',
+                href: '/honey?category=honey',
+            },
+            {
+                name: "huile d'olive",
+                href: '/oil?category=oil',
+            },
+            {
+                name: 'about us',
+                href: '/about-us',
+            },
+        ]
+
+    },
+    ar: {
+        nav: [
+            {
+                name: 'من نحن',
+                href: '/about-us',
+            },
+            {
+                name: 'زيت الزيتون',
+                href: '/oil?category=oil',
+            },
+            {
+                name: 'العسل الحر',
+                href: '/honey?category=honey',
+            },
+            {
+                name: ' الصفحةالرئيسية',
+                href: '/',
+            }
+        ]
+    }
+}
+
+
 

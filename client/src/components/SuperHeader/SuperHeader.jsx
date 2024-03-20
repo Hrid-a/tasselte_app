@@ -1,15 +1,18 @@
 import styled from "styled-components"
-import { COLORS, QUERIES, WEIGHTS } from "../../lib/constants";
-import VisuallyHidden from "../VisuallyHidden";
+import { COLORS, QUERIES } from "../../lib/constants";
 import Icon from "../Icon";
+import { useTranslation } from "react-i18next";
+
 
 const SuperHeader = () => {
+    const { t, i18n } = useTranslation();
+    const lang = i18n.language;
     return (
-        <Wrapper>
+        <Wrapper style={{ '--flex-direction': lang == 'fr' ? "row-reverse" : "row", }}>
             <Text>
-                اتصال بنا: 0628303994
+                {t('text')}
             </Text>
-            مرحبا بزبنائنا الكرام التوصيل بالمجان، و الدفع عند الاستلام، اسرع واطلب الآن
+            {t('mainText')}
         </Wrapper>
     )
 }
@@ -24,10 +27,12 @@ const Wrapper = styled.div`
     font-size: ${14 / 16}rem;
     @media ${QUERIES.laptopAndUp}{
         display: flex;
+        flex-direction: var(--flex-direction, "row");
+        justify-content: space-between;
     }
 `;
 
 const Text = styled.p`
-    margin-inline-end: auto;
+    /* margin-inline-start: auto; */
 `;
 export default SuperHeader
