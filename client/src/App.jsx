@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import MaxWidthWrapper from './components/MaxWidthWrapper';
 import Header from "./components/Header";
 import ProductIndex from "./components/ProductIndex/ProductIndex";
+import Footer from "./components/Footer/Footer";
 const About = lazy(() => import("./components/About"));
 const ProductPage = lazy(() => import("./components/ProductPage"));
 const ProductCategory = lazy(() => import("./components/ProductCategory"));
@@ -16,15 +17,16 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Header />
-        <MaxWidthWrapper as="main">
+        <main>
           <Routes>
             <Route path="/" element={<ProductIndex />} />
-            <Route path="/honey" element={<Suspense fallback={<p>loading...</p>}><ProductCategory /></Suspense>} />
+            <Route path="/products" element={<Suspense fallback={<p>loading...</p>}><ProductCategory /></Suspense>} />
             <Route path="/oil" element={<Suspense fallback={<p>loading...</p>}><ProductCategory /></Suspense>} />
-            <Route path="/product/:id" element={<Suspense fallback={<p>loading...</p>}><ProductPage /></Suspense>} />
+            <Route path="products/product/:id" element={<Suspense fallback={<p>loading...</p>}><ProductPage /></Suspense>} />
             <Route path="/about-us" element={<Suspense fallback={<p>loading...</p>}><About /></Suspense>} />
           </Routes>
-        </MaxWidthWrapper>
+        </main>
+        <Footer />
       </Router>
     </QueryClientProvider>
   )

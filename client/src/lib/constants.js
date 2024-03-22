@@ -41,7 +41,7 @@ export const headerData = {
             },
             {
                 name: 'Miel',
-                href: '/honey?category=honey',
+                href: '/products',
             },
             {
                 name: "huile d'olive",
@@ -66,7 +66,7 @@ export const headerData = {
             },
             {
                 name: 'العسل الحر',
-                href: '/honey?category=honey',
+                href: '/products',
             },
             {
                 name: ' الصفحةالرئيسية',

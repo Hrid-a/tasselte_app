@@ -1,4 +1,4 @@
-import { Search, ShoppingBag, ChevronDown, Menu, X, Phone, Mail, MapPin } from 'react-feather';
+import { Search, ShoppingBag, ChevronDown, Menu, X, Phone, Mail, MapPin, Facebook, Instagram } from 'react-feather';
 import styled from 'styled-components';
 
 const ICONS = {
@@ -8,7 +8,9 @@ const ICONS = {
     'dismiss-icon': X,
     'phone': Phone,
     'email': Mail,
-    "address": MapPin
+    "address": MapPin,
+    facebook: Facebook,
+    instagram: Instagram,
 
 }
 

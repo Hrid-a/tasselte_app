@@ -3,16 +3,24 @@ import { useTranslation } from 'react-i18next';
 import ProductGrid from '../ProductGrid';
 import Button from '../Button';
 import { COLORS, QUERIES, WEIGHTS } from '../../lib/constants';
+import MaxWidthWrapper from '../MaxWidthWrapper';
 import imgsrc from '../../assets/images/product.png';
-import bee from '../../assets/images/bee.svg';
-
+import whatsapp from '../../assets/images/whatsapp.svg';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 const ProductIndex = () => {
     const { t, i18n } = useTranslation();
     const lang = i18n.language;
-
+    const sectionRef = useRef(null);
+    const scrollToProducts = () => {
+        window.scrollTo({
+            top: sectionRef.current.offsetTop,
+            behavior: "smooth"
+        });
+    }
     return (
-        <div>
+        <>
             <Hero style={{ "--text-alignment": lang == 'ar' && "end", "--items-alignment": lang == "ar" && "flex-end" }}>
                 <Wrapper>
                     <Title>
@@ -20,24 +28,39 @@ const ProductIndex = () => {
                         <span>licking</span>
                         <span>honey</span>
                     </Title>
-                    <CallToAction>{t('btn')}</CallToAction>
+                    <CallToAction onClick={scrollToProducts}>{t('btn')}</CallToAction>
                 </Wrapper>
                 <ImageWrapper>
                     <Image src={imgsrc} alt="the world best natural product Honey" />
                 </ImageWrapper>
+
+                <ImgWrapper to={`https://wa.me/${import.meta.env.VITE_PHONE_NUMBER}`}>
+                    <Image src={whatsapp} alt="whatssap to chat and order" />
+                </ImgWrapper>
             </Hero>
-            <ProductGrid />
-        </div>
+            <MaxWidthWrapper ref={sectionRef}>
+                <ProductGrid />
+            </MaxWidthWrapper>
+        </>
     )
 }
 
+const ImgWrapper = styled(Link)`
+    display: block;
+    position: fixed;
+    right: 20px;
+    bottom: 0;
+    width: 70px;
+    height:70px;
+    transform: translateY(-100%)
+`;
 
 const Hero = styled.section`
+    position: relative;
     background: linear-gradient(90deg, #ffa739, #ffae41, #ffb549, #ffbc51, #ffc359, #ffca62, #ffd16b, #ffd774);
-    min-height: 80vh;
-    min-height: 80dvh;
+    min-height: 90dvh;
+    min-height: 90vh;
     padding: 32px;
-    border-radius: 8px;
     display:grid;
     gap: 20px;
     @media ${QUERIES.tabletAndUp}{
@@ -89,4 +112,5 @@ const CallToAction = styled(Button)`
     border: 0;
     cursor: pointer;
 `;
+
 export default ProductIndex
